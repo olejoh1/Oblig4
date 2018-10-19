@@ -17,13 +17,43 @@
 			window.onload = oppstart;
 				var ctx;
 				var canvas;
+				var ordene = ["eple","ananas","pennal","kjemikalier","derivasjon","alphanøkkel","integrasjon","kromosom","hangman"];
+				var brukteBokstaver = [];
+				var blank = [];
+				var ordet = ordet();
 
 			function oppstart(){
-			
+
 				canvas = document.getElementById("tegneflate");
 				ctx = canvas.getContext("2d");
 				document.getElementById("btnGjett").onclick = gjettbokstav;
-			
+				console.log(ordet);
+				ordSattOpp(ordet);
+				document.getElementById("ordet").innerHTML = blank;
+			}
+
+			function gjettbokstav(){
+
+
+
+			}
+
+			function ordet(){
+
+				var tallet = Math.floor(Math.random() * 9);
+				ord = ordene[tallet];
+				return ord;
+
+			}
+
+			function ordSattOpp(ord){
+
+				for(var i = 0; i < ord.length; i++){
+
+					blank.push("_");
+
+				}
+
 			}
 		
 		</script>
@@ -77,7 +107,11 @@
 			<section id="column_nr_1">
                 <h2>Hangman</h2>
 				<article>
-                    <canvas id="tegneflate" width="400px" height="400px">
+					<canvas id="tegneflate" width="400px" height="400px"></canvas>
+					<br />
+					<br />
+					<p id="ordet"></p>
+					<p id="brukteBokstaver"></p>
 					<input id="bokstavInn" type="text">
 					<button type="button" id="btnGjett">Gjett</button>
 					
