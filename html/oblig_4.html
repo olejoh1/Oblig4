@@ -4,14 +4,25 @@
 		<meta charset="utf-8"/>
 		<title>Oblig4</title>
 		<link rel="stylesheet" type="text/css" href="../sheets/sheet.css">
+		<style>
+			#tegneflate{
+				border-style: solid;
+				background-color: #ffffff;
+			}
+		
+		</style>
 		
 		<script>
 		
 			window.onload = oppstart;
-				
+				var ctx;
+				var canvas;
+
 			function oppstart(){
 			
-				
+				canvas = document.getElementById("tegneflate");
+				ctx = canvas.getContext("2d");
+				document.getElementById("btnGjett").onclick = gjettbokstav;
 			
 			}
 		
@@ -66,7 +77,9 @@
 			<section id="column_nr_1">
                 <h2>Hangman</h2>
 				<article>
-                    
+                    <canvas id="tegneflate" width="400px" height="400px">
+					<input id="bokstavInn" type="text">
+					<button type="button" id="btnGjett">Gjett</button>
 					
                 </article>
 			</section>
