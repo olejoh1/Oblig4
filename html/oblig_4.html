@@ -34,6 +34,7 @@
 				letters = ordet.split("");
 				console.log(letters);
 				document.getElementById("bokstavInn").style.border = "2px solid black";
+				draw();
 			}
 
 			function gjettbokstav(){
@@ -53,6 +54,8 @@
 					document.getElementById("brukt").innerHTML = "Denne bokstaven har blitt brukt!!!";
 					document.getElementById("bokstavInn").style.border = "2px solid red";
 				}
+
+				draw();
 			}
 
 			function ordet(){
@@ -112,6 +115,73 @@
 						blank.splice(i,1,letter);
 
 					}
+
+				}
+
+			}
+
+			function draw(){
+
+				var antallFeil = wrong.length;
+
+				if(antallFeil === 0){
+
+					//Galge
+					ctx.beginPath();
+					ctx.rect(40,30,50,340);
+					ctx.fillStyle = "#000000";
+					ctx.fill();
+					ctx.stroke();
+
+					ctx.beginPath();
+					ctx.rect(90,30,180,30);
+					ctx.fillStyle = "#000000";
+					ctx.fill();
+					ctx.stroke();
+
+					ctx.beginPath();
+					ctx.rect(200,60,10,50);
+					ctx.fillStyle = "#000000";
+					ctx.fill();
+					ctx.stroke();
+					
+					//Hode
+					ctx.beginPath();
+					ctx.arc(205,130,20,0, 2 * Math.PI);
+					ctx.stroke();
+
+					//Kropp
+					ctx.beginPath();
+					ctx.rect(198,150,15,60);
+					ctx.fillStyle = "#000000";
+					ctx.fill();
+					ctx.stroke();
+
+					//Arm
+					ctx.beginPath();
+					ctx.moveTo(212,150);
+					ctx.lineTo(226,176);
+					ctx.lineTo(236,206);
+					ctx.lineTo(228,209);
+					ctx.lineTo(216,176);
+					ctx.lineTo(212,166);
+					ctx.lineTo(212,150);
+					ctx.fillStyle = "#000000";
+					ctx.fill();
+					ctx.stroke();
+
+					//Arm
+					ctx.beginPath();
+					ctx.moveTo(198,150);
+					ctx.lineTo(184,176);
+					ctx.lineTo(174,206);
+					ctx.lineTo(182,209);
+					ctx.lineTo(194,176);
+					ctx.lineTo(198,166);
+					ctx.lineTo(198,150);
+					ctx.fillStyle = "#000000";
+					ctx.fill();
+					ctx.stroke();
 
 				}
 
