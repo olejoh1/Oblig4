@@ -21,6 +21,7 @@
 				var wrong = [];
 				var blank = [];
 				var ordet = ordet();
+				var letters = [];
 
 			function oppstart(){
 
@@ -29,13 +30,29 @@
 				document.getElementById("btnGjett").onclick = gjettbokstav;
 				console.log(ordet);
 				ordSattOpp(ordet);
-				document.getElementById("ordet").innerHTML = blank;
+				document.getElementById("ordet").innerHTML = "Dette er ordet: " + blank;
+				letters = ordet.split("");
+				console.log(letters);
+				document.getElementById("bokstavInn").style.border = "2px solid black";
 			}
 
 			function gjettbokstav(){
 
+				var letter = document.getElementById("bokstavInn").value;
+				document.getElementById("bokstavInn").style.border = "2px solid black";
 
+				var check = searchWrong(letter);
 
+				if(check === false){
+					search(letter);
+
+					document.getElementById("ordet").innerHTML = "Dette er ordet: " + blank;
+					document.getElementById("brukteBokstaver").innerHTML = "Brukte bokstaver: " + wrong;
+				}
+				else{
+					document.getElementById("brukt").innerHTML = "Denne bokstaven har blitt brukt!!!";
+					document.getElementById("bokstavInn").style.border = "2px solid red";
+				}
 			}
 
 			function ordet(){
@@ -51,6 +68,50 @@
 				for(var i = 0; i < ord.length; i++){
 
 					blank.push("_");
+
+				}
+
+			}
+
+			function searchWrong(letter){
+
+				var found = wrong.findIndex(function(element){
+					return element === letter;
+				});
+
+				if(found === -1){
+					return false;
+				}
+				else{
+					return true;
+				}
+
+			}
+
+			function search(letter){
+
+				var found = letters.findIndex(function(element){
+					return element === letter;
+				});
+
+				if(found === -1){
+					wrong.push(letter);
+				}
+				else if(found !== -1){
+					add(letter);
+				}
+
+			}
+
+			function add(letter){
+
+				for(var i = 0; i < blank.length; i++){
+
+					if(letter === letters[i]){
+
+						blank.splice(i,1,letter);
+
+					}
 
 				}
 
@@ -114,6 +175,7 @@
 					<p id="brukteBokstaver"></p>
 					<input id="bokstavInn" type="text">
 					<button type="button" id="btnGjett">Gjett</button>
+					<p id="brukt"></p>
 					
                 </article>
 			</section>
