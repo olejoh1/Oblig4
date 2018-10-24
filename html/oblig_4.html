@@ -31,6 +31,7 @@
 				console.log(ordet);
 				ordSattOpp(ordet);
 				document.getElementById("ordet").innerHTML = "Dette er ordet: " + blank;
+				document.getElementById("brukteBokstaver").innerHTML = "Brukte bokstaver: " + wrong;
 				letters = ordet.split("");
 				console.log(letters);
 				document.getElementById("bokstavInn").style.border = "2px solid black";
@@ -121,9 +122,22 @@
 
 			}
 
+			function check(){
+
+				for(var i = blank.length; i--;) {
+					if(letters[i] !== blank[i])
+						return false;
+				}
+
+				return true;
+
+			}
+
 			function draw(){
 
 				var antallFeil = wrong.length;
+
+				var won = check();
 
 				if(antallFeil === 0){
 
@@ -216,11 +230,38 @@
 					ctx.fill();
 					ctx.stroke();
 
-					
+					document.getElementById("lastChance").innerHTML = "Last chance" + "<br />" + "You can do this";
 
 				}
 				else if(antallFeil === 7){
+
+					ctx.clearRect(0,0,400,400);
+
+					var gradient=ctx.createLinearGradient(0,0,canvas.width,0);
+
+					ctx.font="30px Verdana";
+					gradient.addColorStop("0","black");
+					gradient.addColorStop("0.5","red");
 					
+					ctx.fillStyle=gradient;
+					ctx.fillText("Game Over!!",100,200);
+					
+				}
+
+				if(won === true){
+
+					ctx.clearRect(0,0,400,400);
+
+					var gradient=ctx.createLinearGradient(0,0,canvas.width,0);
+
+					ctx.font="30px Verdana";
+					gradient.addColorStop("0","black");
+					gradient.addColorStop("0.5","blue");
+					gradient.addColorStop("1","red");
+
+					ctx.fillStyle=gradient;
+					ctx.fillText("You Did it!!!",100,200);
+
 				}
 
 			}
@@ -284,6 +325,7 @@
 					<input id="bokstavInn" type="text">
 					<button type="button" id="btnGjett">Gjett</button>
 					<p id="brukt"></p>
+					<p id="lastChance"></p>
 					
                 </article>
 			</section>
