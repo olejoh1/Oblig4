@@ -41,6 +41,7 @@
 
 				var letter = document.getElementById("bokstavInn").value;
 				document.getElementById("bokstavInn").style.border = "2px solid black";
+				document.getElementById("brukt").innerHTML = "";
 
 				var check = searchWrong(letter);
 
@@ -144,11 +145,14 @@
 					ctx.fillStyle = "#000000";
 					ctx.fill();
 					ctx.stroke();
-					
+				}
+				else if(antallFeil === 1){
 					//Hode
 					ctx.beginPath();
 					ctx.arc(205,130,20,0, 2 * Math.PI);
 					ctx.stroke();
+				}
+				else if(antallFeil === 2){
 
 					//Kropp
 					ctx.beginPath();
@@ -156,6 +160,8 @@
 					ctx.fillStyle = "#000000";
 					ctx.fill();
 					ctx.stroke();
+				}
+				else if(antallFeil === 3){
 
 					//Arm
 					ctx.beginPath();
@@ -169,7 +175,8 @@
 					ctx.fillStyle = "#000000";
 					ctx.fill();
 					ctx.stroke();
-
+				}
+				else if(antallFeil === 4){
 					//Arm
 					ctx.beginPath();
 					ctx.moveTo(198,150);
@@ -182,13 +189,38 @@
 					ctx.fillStyle = "#000000";
 					ctx.fill();
 					ctx.stroke();
-
+				}
+				else if(antallFeil === 5){
 					//Bein
 					ctx.beginPath();
-					ctx.moveTo(212,210);
-					ctx.lineTo(234,210);
+					ctx.moveTo(213,210);
+					ctx.lineTo(216,235);
+					ctx.lineTo(214,250);
+					ctx.lineTo(207,250);
+					ctx.lineTo(209,235);
+					ctx.lineTo(206,210);
+					ctx.fillStyle = "#000000";
+					ctx.fill();
+					ctx.stroke();
+				}
+				else if(antallFeil === 6){
+					//Bein
+					ctx.beginPath();
+					ctx.moveTo(198,210);
+					ctx.lineTo(195,235);
+					ctx.lineTo(197,250);
+					ctx.lineTo(204,250);
+					ctx.lineTo(202,235);
+					ctx.lineTo(205,210);
+					ctx.fillStyle = "#000000";
+					ctx.fill();
 					ctx.stroke();
 
+					
+
+				}
+				else if(antallFeil === 7){
+					
 				}
 
 			}
