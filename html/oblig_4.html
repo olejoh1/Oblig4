@@ -43,7 +43,8 @@
 
 			function gjettbokstav(){
 
-				var letter = document.getElementById("bokstavInn").value;
+				var inn = document.getElementById("bokstavInn").value;
+				var letter = inn.toLowerCase();
 				document.getElementById("bokstavInn").style.border = "2px solid black";
 				document.getElementById("brukt").innerHTML = "";
 				
@@ -107,11 +108,26 @@
 					return element === letter;
 				});
 
-				if(found === -1){
-					wrong.push(letter);
-				}
-				else if(found !== -1){
+				
+				if(found !== -1){
+
 					add(letter);
+				}
+				else if(found === -1){
+					if(letter === " "){
+						document.getElementById("brukt").innerHTML = "SPACE er ikke GODKJENT!!!";
+						document.getElementById("bokstavInn").style.border = "2px solid red";
+					}
+					else if(letter === ""){
+						document.getElementById("brukt").innerHTML = "BLANK er ikke GODKJENT!!!";
+						document.getElementById("bokstavInn").style.border = "2px solid red";
+					}
+					else if(letter.length > 1){
+						checkOrd(letter);
+					}
+					else{
+					wrong.push(letter);
+					}
 				}
 
 			}
@@ -138,6 +154,35 @@
 				}
 
 				return true;
+
+			}
+
+			function checkOrd(letter){
+
+				var check = [];
+				check = letter.split("");
+
+				for(var i = 0; i < letters.length; i++){
+
+					if(check[i] === " "){
+						document.getElementById("brukt").innerHTML = "SPACE er ikke GODKJENT!!!";
+						document.getElementById("bokstavInn").style.border = "2px solid red";
+						return;
+					}
+					
+					else if(check[i] !== letters[i]){
+						wrong.push(letter);
+						return;
+					}
+				}
+
+				for(var i = 0; i < check.length; i++){
+
+					if(check[i] === letters[i]){
+						blank.splice(i,1,check[i]);
+					}
+
+				}
 
 			}
 
@@ -282,6 +327,7 @@
 					document.getElementById("lastChance").style.display = "none";
 					document.getElementById("bokstavInn").style.display = "none";
 					document.getElementById("restart").style.display = "inline-block";
+					document.getElementById("ordet").innerHTML = letters;
 
 				}
 
