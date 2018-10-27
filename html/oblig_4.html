@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<title>Oblig4</title>
-		<link rel="stylesheet" type="text/css" href="../sheets/sheet.css">
+		<link rel="stylesheet" type="text/css" href="../sheet/sheet.css">
 		<style>
 			#tegneflate{
 				border-style: solid;
@@ -22,12 +22,14 @@
 				var blank = [];
 				var ordet = ordet();
 				var letters = [];
+				var teller = 0;
 
 			function oppstart(){
 
 				canvas = document.getElementById("tegneflate");
 				ctx = canvas.getContext("2d");
 				document.getElementById("btnGjett").onclick = gjettbokstav;
+				document.getElementById("restart").onclick = refresh;
 				console.log(ordet);
 				ordSattOpp(ordet);
 				document.getElementById("ordet").innerHTML = "Dette er ordet: " + blank;
@@ -36,6 +38,7 @@
 				console.log(letters);
 				document.getElementById("bokstavInn").style.border = "2px solid black";
 				draw();
+				document.getElementById("restart").style.display = "none";
 			}
 
 			function gjettbokstav(){
@@ -43,14 +46,19 @@
 				var letter = document.getElementById("bokstavInn").value;
 				document.getElementById("bokstavInn").style.border = "2px solid black";
 				document.getElementById("brukt").innerHTML = "";
-
+				
 				var check = searchWrong(letter);
+				
+				teller++;
+
+				console.log(teller);
 
 				if(check === false){
 					search(letter);
 
 					document.getElementById("ordet").innerHTML = "Dette er ordet: " + blank;
 					document.getElementById("brukteBokstaver").innerHTML = "Brukte bokstaver: " + wrong;
+					document.getElementById("bokstavInn").value = "";
 				}
 				else{
 					document.getElementById("brukt").innerHTML = "Denne bokstaven har blitt brukt!!!";
@@ -245,6 +253,11 @@
 					
 					ctx.fillStyle=gradient;
 					ctx.fillText("Game Over!!",100,200);
+					document.getElementById("ordet").innerHTML = "Dette er ordet: " + letters;
+					document.getElementById("btnGjett").style.display = "none";
+					document.getElementById("lastChance").style.display = "none";
+					document.getElementById("bokstavInn").style.display = "none";
+					document.getElementById("restart").style.display = "inline-block";
 					
 				}
 
@@ -260,10 +273,22 @@
 					gradient.addColorStop("1","red");
 
 					ctx.fillStyle=gradient;
-					ctx.fillText("You Did it!!!",100,200);
+					ctx.fillText("YOU DID IT!!!",100,200);
+
+					ctx.font="20px Verdana";
+					ctx.fillText("Your score is: " + teller,120,230);
+
+					document.getElementById("btnGjett").style.display = "none";
+					document.getElementById("lastChance").style.display = "none";
+					document.getElementById("bokstavInn").style.display = "none";
+					document.getElementById("restart").style.display = "inline-block";
 
 				}
 
+			}
+
+			function refresh(){
+				window.location.reload(true);
 			}
 		
 		</script>
@@ -326,6 +351,7 @@
 					<button type="button" id="btnGjett">Gjett</button>
 					<p id="brukt"></p>
 					<p id="lastChance"></p>
+					<button type="button" id="restart">Retry</button>
 					
                 </article>
 			</section>
